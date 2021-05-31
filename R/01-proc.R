@@ -1,6 +1,8 @@
 # Code: Proc --------------------------------------------------------------
 # 1. Load packages --------------------------------------------------------
-pacman::p_load(tidyverse, readr, sjPlot)
+pacman::p_load(tidyverse, readr, sjPlot, ggplot2, RColorBrewer)
+
+theme_set(theme_sjplot2())
 
 # 2. Load data ------------------------------------------------------------
 file_names=as.list(dir(path ="input/data/", pattern="*.R"))
@@ -37,4 +39,48 @@ sjPlot::plot_frq(sind_fem$g28_2)
 sjPlot::plot_frq(sind_fem$d4_8) # Menos que siempre 
 sjPlot::plot_frq(sind_fem$g6_6)
 
-sjPlot::plot_frq(sind_fem$h2_3)
+## Expandidos
+sjPlot::plot_frq(sind_fem$h2_3, weight.by = sind_fem$fe_empresa)
+sjPlot::plot_frq(sindicatos$h2_3, weight.by = sindicatos$fe_empresa)
+
+## Corresponsabilidad
+sjPlot::plot_frq(sind_fem$d4_8, weight.by = sind_fem$fe_empresa, show.n = F, show.ci = T, geom.colors = "mediumpurple",
+                 errorbar.color = "black") +
+  labs(x = "", y = "Frecuencia", title =" Empresas feminizada",caption = "Fuente: Elaboración propia en base a ENCLA (2019), datos ponderados.")
+
+sjPlot::plot_frq(sindicatos$d4_8, weight.by = sindicatos$fe_empresa, show.n = F, show.ci = T, geom.colors = "skyblue",
+                 errorbar.color = "black") +
+  labs( y = "Frecuencia", title =" Empresas masculinizadas",caption = "Fuente: Elaboración propia en base a ENCLA (2019), datos ponderados.")
+
+
+ggsave(plot = last_plot(),
+       filename = "grafico4.2.png",
+       device = "png",
+       dpi = 500,
+       units = "cm",
+       width = 20,
+       height = 15)
+
+## Sindicatos
+
+## Corresponsabilidad
+sjPlot::plot_frq(sind_fem$g4_3, weight.by = sind_fem$fe_empresa, show.n = F, show.ci = T, geom.colors = "mediumpurple",
+                 errorbar.color = "black") +
+  labs(x = "", y = "Frecuencia", title =" Secretarias en empresas feminizada",caption = "Fuente: Elaboración propia en base a ENCLA (2019), datos ponderados.")
+
+sjPlot::plot_frq(sindicatos$g4_3, weight.by = sindicatos$fe_empresa, show.n = F, show.ci = T, geom.colors = "skyblue",
+                 errorbar.color = "black") +
+  labs( y = "Frecuencia", title =" Secretarios en empresas en general",caption = "Fuente: Elaboración propia en base a ENCLA (2019), datos ponderados.")
+
+
+ggsave(plot = last_plot(),
+       filename = "grafico5.6.png",
+       device = "png",
+       dpi = 500,
+       units = "cm",
+       width = 20,
+       height = 15)
+
+## Expandidos
+sjPlot::plot_frq(sind_fem$g28_2, weight.by = sind_fem$fe_empresa)
+sjPlot::plot_frq(sindicatos$g28_2, weight.by = sindicatos$fe_empresa)
