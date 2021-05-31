@@ -84,3 +84,6 @@ ggsave(plot = last_plot(),
 ## Expandidos
 sjPlot::plot_frq(sind_fem$g28_2, weight.by = sind_fem$fe_empresa)
 sjPlot::plot_frq(sindicatos$g28_2, weight.by = sindicatos$fe_empresa)
+
+sjPlot::plot_frq(sind_fem$g6_6, weight.by = sind_fem$fe_empresa)
+sjPlot::plot_frq(sindicatos$g6_6, weight.by = sindicatos$fe_empresa)
